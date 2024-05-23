@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import cx from "classnames";
+import Card from "../card";
 
 import style from "./style.module.scss";
 
@@ -14,82 +15,61 @@ const Animation = () => {
   const sectionWrapper = useRef(null);
   const { scrollYProgress: animationWrapperScrollYProgress } = useScroll({
     target: sectionWrapper,
-    offset: ["end end", "start end"],
+    offset: ["end end", "start start"],
   });
-
-  const wrapperHeight = useTransform(
-    animationWrapperScrollYProgress,
-    [0.5, 0.7],
-    [500, 0],
-    { ease: easeIn }
-  );
-  const wrapperBottom = useTransform(
-    animationWrapperScrollYProgress,
-    [0.2, 0.4, 0.5, 0.65],
-    [100, 350, 500, 600]
-  );
-  const wrapperRight = useTransform(
-    animationWrapperScrollYProgress,
-    [0.2, 0.8],
-    ["70%", "0%"]
-  );
-
-  const greenSectionOpacity = useTransform(
-    animationWrapperScrollYProgress,
-    [0.6, 0.75],
-    [0, 1]
-  );
 
   return (
     <div>
-      <p>This is animation component</p>
-      <div className="mt-8 h-[120vh] border-2 border-red-300"></div>
       <div
         ref={sectionWrapper}
         className={
-          "relative mt-8 h-[180vh] border-2 border-red-300 " + style.container
+          "relative h-[230vh] border-2 border-red-300 " + style.container
         }
       >
         <div className={style.stickySection}>
-          <motion.div
-            className={style.animationWrapper}
-            style={{
-              height: wrapperHeight,
-              right: wrapperRight,
-              bottom: wrapperBottom,
-            }}
-          >
-            <motion.div
-              className={style.animationWrapperTop}
-              style={{
-                height: wrapperHeight,
-              }}
-            >
-              <div className={style.greenTopPart}>
-                <p>
-                  <b>Paxful</b> design and develop application to reach
-                  customers on smartphones and tablets.
-                </p>
-                <div className={style.bottomGreen}>
-                  <p>
-                    <b>PAXFUL</b>
-                  </p>
-                  <div className={style.downloads}>+30K App Downloads</div>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              className={cx(style.greenBox)}
-              style={{
-                opacity: greenSectionOpacity,
-              }}
-            >
-              <p>
-                <b>PAXFUL</b>
-              </p>
-            </motion.div>
-          </motion.div>
-          <div></div>
+          <Card
+            animationWrapperScrollYProgress={animationWrapperScrollYProgress}
+            wrapperHeightInput={[
+              [0.6, 0.8],
+              [500, 0],
+            ]}
+            wrapperBottomInput={[
+              [0.3, 0.5, 0.7, 0.9],
+              [200, 350, 50, 175],
+            ]}
+            wrapperRightInput={[
+              [0.3, 0.7, 0.9],
+              ["65%", "10%", "0%"],
+            ]}
+            opacityInput={[
+              [0.7, 0.85],
+              [0, 1],
+            ]}
+            zIndex={10}
+            cardColor={["rgba(50, 181, 108, 255)", "#299559", "#116949"]}
+            bottomBoxColor={"green"}
+          />
+          <Card
+            animationWrapperScrollYProgress={animationWrapperScrollYProgress}
+            wrapperHeightInput={[
+              [0.6, 0.8],
+              [500, 0],
+            ]}
+            wrapperBottomInput={[
+              [0.3, 0.5, 0.7, 0.9],
+              [200, 350, 115, 240],
+            ]}
+            wrapperRightInput={[
+              [0.3, 0.7, 0.9],
+              ["35%", "7%", "-4%"],
+            ]}
+            opacityInput={[
+              [0.7, 0.85],
+              [0, 1],
+            ]}
+            cardColor={["yellow", "#299559", "#116949"]}
+            bottomBoxColor={"yellow"}
+          />
         </div>
       </div>
       <div className="mt-8 h-[80vh] border-2 border-red-300"></div>
